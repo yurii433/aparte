@@ -1,0 +1,38 @@
+.registerForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  align-items: center;
+}
+
+.registerFormWrap {
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  background-color: rgb(246, 252, 253);
+  h2 {
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: row;
+}
+
+.underText {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  p {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 300;
+    a {
+      color: black;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.authInput {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  input {
+    border: 1px solid goldenrod;
+    border-radius: 5px;
+    padding: 10px 5px;
+  }
+}

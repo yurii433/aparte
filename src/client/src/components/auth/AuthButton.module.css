@@ -1,0 +1,11 @@
+.authButton {
+  border: none;
+  color: white;
+  background-color: #006ce4;
+  padding: 5px;
+  width: 100%;
+  margin-top: 10px;
+}
+.authButton:hover {
+  background-color: #003b95;
+}
