@@ -37,7 +37,6 @@ const ApartmentsList = ({
           if (response.data.apartments) {
             setApartments(response.data.apartments);
           }
-          console.log(response);
         } catch (err) {
           console.log(err);
         }
