@@ -36,7 +36,7 @@ const AddApartmentForm = ({
     ) {
       setErrorMessage("Check the provided data");
     } else {
-      const url = "http://127.0.0.1:5173/apartments";
+      const url = "https://aparte-api.onrender.com/apartments";
 
       const sendDatatoDB = async () => {
         try {

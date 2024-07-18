@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ApartmentList.module.css";
 
-const URL = "http://127.0.0.1:5173/apartments";
+const URL = "https://aparte-api.onrender.com/apartments";
 
 interface ApartmentsListInterface {
   rooms: number;
