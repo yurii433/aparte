@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import styles from "./ApartmentList.module.css";
 
 const URL = "https://aparte-api.onrender.com/apartments";
@@ -23,6 +23,9 @@ const ApartmentsList = ({
 }: ApartmentListProps) => {
   const [apartmetns, setApartments] = useState<ApartmentsListInterface[]>([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   useEffect(
     function () {
       const fetchData = async () => {
@@ -35,10 +38,17 @@ const ApartmentsList = ({
           };
           const response = await axios.get(URL, options);
           if (response.data.apartments) {
+            setIsLoading(false);
             setApartments(response.data.apartments);
           }
-        } catch (err) {
-          console.log(err);
+        } catch (err: unknown) {
+          setIsLoading(false);
+          setError(true);
+          if (axios.isAxiosError(err)) {
+            console.log("Axios error:", err.message);
+          } else {
+            console.log("Unexpected error:", err);
+          }
         }
       };
       fetchData();
@@ -57,6 +67,30 @@ const ApartmentsList = ({
       console.log(err);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.loaderWrap}>
+        <div className={styles.loader}></div>
+        <div className={styles.loaderToolTip}>
+          {" "}
+          <h4> Loading Apartments</h4>
+          <div className={styles.loaderToolTipText}>
+            Our API is hosted with Render.com free of payment plan. There may be
+            issues with API's 'cold start', thank you for understanding.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <h3 className={styles.error}>
+        Unexpected error occured. Please refresh the page or return later
+      </h3>
+    );
+  }
 
   return (
     <div className={styles.apartmentsList}>
