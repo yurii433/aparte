@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import styles from "./ApartmentList.module.css";
 
 const URL = "https://aparte-api.onrender.com/apartments";
