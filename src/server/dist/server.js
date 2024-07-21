@@ -18,7 +18,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/apartments", apartmentsRoutes_1.default);
 app.use("/users", usersRoutes_1.default);
-app.use((res) => {
+app.use((req, res) => {
     res.status(404).json({ error: "Not Found" });
     console.log("Not found");
 });

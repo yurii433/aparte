@@ -1,4 +1,4 @@
-import express, { Express, Response } from "express";
+import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import apartmentsRoutes from "./routes/apartmentsRoutes";
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/apartments", apartmentsRoutes);
 app.use("/users", usersRoutes);
-app.use((res: Response) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({ error: "Not Found" });
   console.log("Not found");
 });
