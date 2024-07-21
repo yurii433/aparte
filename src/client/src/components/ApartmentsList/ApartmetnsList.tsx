@@ -21,7 +21,7 @@ const ApartmentsList = ({
   apartmentsListChanged,
   setApartmentsListChanged,
 }: ApartmentListProps) => {
-  const [apartmetns, setApartments] = useState<ApartmentsListInterface[]>([]);
+  const [apartments, setApartments] = useState<ApartmentsListInterface[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -95,10 +95,10 @@ const ApartmentsList = ({
   return (
     <div className={styles.apartmentsList}>
       <h2 className={styles.apartmentListHeader}>
-        Your Location: found {apartmetns.length} apartments
+        Your Location: found {apartments.length} apartments
       </h2>
-      {apartmetns.length > 0 ? (
-        apartmetns.map((apt) => {
+      {apartments.length > 0 ? (
+        apartments.map((apt) => {
           return (
             <div className={styles.apartmentCard} key={apt._id}>
               <div className={styles.cardText}>
