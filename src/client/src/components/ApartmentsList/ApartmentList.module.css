@@ -71,9 +71,9 @@
 }
 
 .loaderToolTip {
-  h4 {
+  .loaderHeader {
     font-size: 2rem;
-    color: rgb(74, 73, 73);
+    color: rgb(153, 149, 149);
     text-decoration-style: dashed;
   }
   text-align: center;
@@ -81,8 +81,16 @@
 
 .loaderToolTipText {
   visibility: hidden;
+  background-color: #fff89a;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
 }
-.loaderToolTip:hover .loaderToolTipText {
+.loaderHeader:hover {
+  color: black;
+}
+
+.loaderWrap:hover .loaderToolTipText {
   visibility: visible;
 }
 /* HTML: <div class="loader"></div> */

@@ -40,6 +40,9 @@ const ApartmentsList = ({
           if (response.data.apartments) {
             setIsLoading(false);
             setApartments(response.data.apartments);
+          } else {
+            setError(true);
+            throw new Error(`No apartments found`);
           }
         } catch (err: unknown) {
           setIsLoading(false);
@@ -74,10 +77,14 @@ const ApartmentsList = ({
         <div className={styles.loader}></div>
         <div className={styles.loaderToolTip}>
           {" "}
-          <h4> Loading Apartments</h4>
-          <div className={styles.loaderToolTipText}>
-            Our API is hosted with Render.com free of payment plan. There may be
-            issues with API's 'cold start', thank you for understanding.
+          <h4 className={styles.loaderHeader}> Loading Apartments</h4>
+          <div>
+            <p className={styles.loaderToolTipText}>
+              For demo purposes, this API is hosted on Render.com using their
+              free plan. <br />
+              The first time you load the app, it might take a bit longer than
+              expected &#40;up to 60 seconds&#41;. Thank you for your patience.
+            </p>
           </div>
         </div>
       </div>
