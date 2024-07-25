@@ -8,7 +8,8 @@ const usersGetAllUsers = async (req: Request, res: Response) => {
     if (!users) {
       res.status(404).json({ message: "No users found" });
     }
-    res.status(200).json({ data: users });
+    console.log("test");
+    res.status(200).json({ message: "test", data: users });
   } catch (err) {
     console.log(err);
     res.status(404).json({ error: err });
@@ -35,11 +36,19 @@ const usersGetUser = async (req: Request, res: Response) => {
 
 const usersPostUser = async (req: Request, res: Response) => {
   try {
-    const user = await User.create(req.body);
+    const userExists = await User.find(req.body.email).exec();
+
+    if (userExists) {
+      res.status(400).json({ message: "user already exists" });
+      console.log("User already exists");
+    }
+    console.log(userExists);
+
+    /*   const user = await User.create(req.body); */
 
     res.status(201).json({
       status: "success",
-      data: user,
+      data: userExists,
     });
   } catch (err) {
     res.status(400).json({ status: "fail", message: (err as Error).message });

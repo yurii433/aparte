@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   usersGetAllUsers,
   usersGetUser,
@@ -6,6 +7,7 @@ import {
   usersDeleteUser,
   usersPatchUser,
 } from "../controllers/usersController";
+
 const router = express();
 
 router.get("/", usersGetAllUsers);

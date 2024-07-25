@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import styles from "./Register.module.css";
+import axios from "axios";
 
 import AuthInputLabel from "../../components/auth/AuthInputLabel";
 import AuthButton from "../../components/auth/AuthButton";
@@ -16,15 +17,24 @@ const Register: React.FC = () => {
     password: "",
   });
 
-  const registerNewUser = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("logging in...");
-  };
-
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUserData((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value };
     });
+  };
+
+  const registerNewUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const URL = `https://aparte-api.onrender.com/users`;
+
+    try {
+      const res = await axios.post(URL, newUserData);
+      if (res.status === 201) {
+        console.log("success");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
