@@ -28,12 +28,10 @@ const Register: React.FC = () => {
     const URL = `https://aparte-api.onrender.com/users`;
 
     try {
-      const res = await axios.post(URL, newUserData);
-      if (res.status === 201) {
-        console.log("success");
-      }
-    } catch (err) {
-      console.log(err);
+      const users = await axios.get(URL);
+      console.log(users.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -6,12 +6,13 @@ import {
   usersPostUser,
   usersDeleteUser,
   usersPatchUser,
+  user_signup,
 } from "../controllers/usersController";
 
 const router = express();
 
 router.get("/", usersGetAllUsers);
-router.post("/", usersPostUser);
+router.post("/", user_signup);
 router.get("/:id", usersGetUser);
 router.delete("/:id", usersDeleteUser);
 router.patch("/:id", usersPatchUser);

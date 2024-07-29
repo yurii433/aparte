@@ -2,6 +2,29 @@ import { Request, Response } from "express";
 import User from "../models/userModel";
 import mongoose from "mongoose";
 
+const user_signup = async (req: Request, res: Response) => {
+  try {
+    if (!req.body.email || !req.body.password) {
+      return res
+        .status(400)
+        .json({ message: "Both email and password are required" });
+    }
+
+    const user = await User.find({ email: req.body.email });
+    if (user.length >= 1) {
+      return res
+        .status(400)
+
+        .json({ message: "User with this email already exists" });
+    }
+    const newUser = await User.create(req.body);
+    res.status(201).json({ message: "New user created", user: newUser });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ status: "fail", message: (err as Error).message });
+  }
+};
+
 const usersGetAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find();
@@ -9,7 +32,7 @@ const usersGetAllUsers = async (req: Request, res: Response) => {
       res.status(404).json({ message: "No users found" });
     }
     console.log("test");
-    res.status(200).json({ message: "test", data: users });
+    res.status(200).json({ count: users.length, users: users });
   } catch (err) {
     console.log(err);
     res.status(404).json({ error: err });
@@ -109,4 +132,5 @@ export {
   usersPostUser,
   usersDeleteUser,
   usersPatchUser,
+  user_signup,
 };
