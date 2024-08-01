@@ -9,15 +9,20 @@ const cors_1 = __importDefault(require("cors"));
 const apartmentsRoutes_1 = __importDefault(require("./routes/apartmentsRoutes"));
 const usersRoutes_1 = __importDefault(require("./routes/usersRoutes"));
 const mongoConfig_1 = __importDefault(require("./mongoConfig"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 (0, mongoConfig_1.default)().catch(console.dir);
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/apartments", apartmentsRoutes_1.default);
 app.use("/users", usersRoutes_1.default);
+app.use("/set-cookies", (req, res) => {
+    res.send("you got the cookies");
+});
 app.use((req, res) => {
     res.status(404).json({ error: "Not Found" });
     console.log("Not found");
