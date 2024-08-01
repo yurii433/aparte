@@ -22,6 +22,11 @@
   flex-direction: row;
 }
 
+.loginError {
+  color: red;
+  text-align: center;
+}
+
 .underText {
   margin: 10px 0;
   display: flex;

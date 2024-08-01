@@ -4,6 +4,7 @@
   "main": "src/server/index.js",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
     "concurrently": "^8.2.2"
   },
   "scripts": {

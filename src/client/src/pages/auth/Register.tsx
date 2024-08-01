@@ -17,6 +17,11 @@ const Register: React.FC = () => {
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    emailError: false,
+    passwordError: false,
+  });
+
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUserData((prevData) => {
       return { ...prevData, [e.target.name]: e.target.value };
@@ -52,15 +57,21 @@ const Register: React.FC = () => {
               onChange={handleUserDataChange}
             />
           </AuthInputLabel>
+          {errors.emailError && (
+            <div className={styles.loginError}>Check your email</div>
+          )}
           <AuthInputLabel label="Password">
             <input
-              type="text"
+              type="password"
               placeholder="Enter your password"
               value={newUserData?.password}
               name="password"
               onChange={handleUserDataChange}
             />
           </AuthInputLabel>
+          {errors.passwordError && (
+            <div className={styles.loginError}>Check your password</div>
+          )}
 
           <AuthButton>Register</AuthButton>
         </form>
