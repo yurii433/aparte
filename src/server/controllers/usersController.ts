@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/userModel";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 const user_signup = async (req: Request, res: Response) => {
   try {
@@ -10,19 +11,34 @@ const user_signup = async (req: Request, res: Response) => {
         .json({ message: "Both email and password are required" });
     }
 
-    const user = await User.find({ email: req.body.email });
-    if (user.length >= 1) {
+    const existingUser = await User.find({ email: req.body.email });
+    if (existingUser.length >= 1) {
       return res
         .status(400)
 
         .json({ message: "User with this email already exists" });
     }
-    const newUser = await User.create(req.body);
-    res.status(201).json({ message: "New user created", user: newUser });
+
+    const { email, password } = req.body;
+    const user = await User.create({ email, password });
+
+    const token = createToken(user._id);
+
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+
+    res.status(201).json({ user: user._id });
   } catch (err) {
     console.log(err);
     res.status(400).json({ status: "fail", message: (err as Error).message });
   }
+};
+
+const maxAge = 3 * 24 * 60 * 60;
+
+const createToken = (id: any) => {
+  return jwt.sign({ id }, "it`s a secret!", {
+    expiresIn: maxAge,
+  });
 };
 
 const usersGetAllUsers = async (req: Request, res: Response) => {
