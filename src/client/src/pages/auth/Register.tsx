@@ -36,6 +36,11 @@ const Register: React.FC = () => {
       const users = await axios.get(URL);
       console.log(users.data);
     } catch (error) {
+      if (error === "test") {
+        setErrors((prevErrors) => {
+          return { ...prevErrors };
+        });
+      }
       console.log(error);
     }
   };
