@@ -20,13 +20,28 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/apartments", apartmentsRoutes_1.default);
 app.use("/users", usersRoutes_1.default);
-app.use("/set-cookies", (req, res) => {
-    res.send("you got the cookies");
+/* app.use("/set-cookies", (req: Request, res: Response) => {
+  
+
+  res.cookie("newUser", false);
+  res.cookie("isEmployee", true, {
+    maxAge: 1000 * 60 * 60 * 24,
+    httpOnly: true,
+  });
+  res.send("you got the cookies!");
+  console.log("cookie!");
 });
-app.use((req, res) => {
-    res.status(404).json({ error: "Not Found" });
-    console.log("Not found");
+
+app.use("/get-cookies", (req: Request, res: Response) => {
+  const cookies = req.cookies;
+  console.log(cookies.newUser);
+  res.json(cookies);
 });
+
+app.use((req: Request, res: Response) => {
+  res.status(404).json({ error: "Not Found" });
+  console.log("Not found");
+}); */
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });

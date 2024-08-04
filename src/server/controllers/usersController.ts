@@ -73,27 +73,6 @@ const usersGetUser = async (req: Request, res: Response) => {
   }
 };
 
-const usersPostUser = async (req: Request, res: Response) => {
-  try {
-    const userExists = await User.find(req.body.email).exec();
-
-    if (userExists) {
-      res.status(400).json({ message: "user already exists" });
-      console.log("User already exists");
-    }
-    console.log(userExists);
-
-    /*   const user = await User.create(req.body); */
-
-    res.status(201).json({
-      status: "success",
-      data: userExists,
-    });
-  } catch (err) {
-    res.status(400).json({ status: "fail", message: (err as Error).message });
-  }
-};
-
 const usersDeleteUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
@@ -145,7 +124,6 @@ const usersPatchUser = async (req: Request, res: Response) => {
 export {
   usersGetAllUsers,
   usersGetUser,
-  usersPostUser,
   usersDeleteUser,
   usersPatchUser,
   user_signup,

@@ -17,10 +17,8 @@ const Register: React.FC = () => {
     password: "",
   });
 
-  const [errors, setErrors] = useState({
-    emailError: false,
-    passwordError: false,
-  });
+  const [error, setError] = useState("");
+  const [successSignup, setSuccessSignup] = useState(false);
 
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUserData((prevData) => {
@@ -33,14 +31,19 @@ const Register: React.FC = () => {
     const URL = `https://aparte-api.onrender.com/users`;
 
     try {
-      const users = await axios.get(URL);
-      console.log(users.data);
-    } catch (error) {
-      if (error === "test") {
-        setErrors((prevErrors) => {
-          return { ...prevErrors };
-        });
-      }
+      const user = await axios.post(URL, newUserData);
+      console.log("New user registered successfully", user);
+      setNewUserData({
+        email: "",
+        password: "",
+      });
+      setError("");
+      setSuccessSignup(true);
+    } catch (error: any) {
+      error.response.data.message
+        ? setError(error.response.data.message)
+        : setError("");
+
       console.log(error);
     }
   };
@@ -62,8 +65,8 @@ const Register: React.FC = () => {
               onChange={handleUserDataChange}
             />
           </AuthInputLabel>
-          {errors.emailError && (
-            <div className={styles.loginError}>Check your email</div>
+          {error.length > 0 && (
+            <div className={styles.signupError}>{error}</div>
           )}
           <AuthInputLabel label="Password">
             <input
@@ -74,10 +77,16 @@ const Register: React.FC = () => {
               onChange={handleUserDataChange}
             />
           </AuthInputLabel>
-          {errors.passwordError && (
-            <div className={styles.loginError}>Check your password</div>
+          {error.length > 0 && (
+            <div className={styles.signupError}>{error}</div>
           )}
-
+          {successSignup && (
+            <div>
+              <h4 className={styles.signupSuccess}>
+                You've successfully registered a new account.
+              </h4>
+            </div>
+          )}
           <AuthButton>Register</AuthButton>
         </form>
         <div className={styles.underText}>

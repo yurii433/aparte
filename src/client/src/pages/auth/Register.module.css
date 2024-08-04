@@ -22,8 +22,13 @@
   flex-direction: row;
 }
 
-.loginError {
+.signupError {
   color: red;
+  text-align: center;
+}
+
+.signupSuccess {
+  color: green;
   text-align: center;
 }
 
