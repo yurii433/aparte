@@ -16,7 +16,7 @@ const user_signup = async (req: Request, res: Response) => {
       return res
         .status(400)
 
-        .json({ message: "User with this email already exists" });
+        .json({ message: "GUser with this email already exists" });
     }
 
     const { email, password } = req.body;
