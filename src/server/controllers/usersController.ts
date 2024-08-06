@@ -16,16 +16,16 @@ const user_signup = async (req: Request, res: Response) => {
       return res
         .status(400)
 
-        .json({ message: "GUser with this email already exists" });
+        .json({ message: "A user with this email already exists" });
     }
 
     const { email, password } = req.body;
     const user = await User.create({ email, password });
 
     const token = createToken(user._id);
-    /* 
+
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
- */
+
     res.status(201).json({ user: user._id });
   } catch (err) {
     console.log(err);
@@ -47,7 +47,7 @@ const usersGetAllUsers = async (req: Request, res: Response) => {
     if (!users) {
       res.status(404).json({ message: "No users found" });
     }
-    console.log("test");
+
     res.status(200).json({ count: users.length, users: users });
   } catch (err) {
     console.log(err);

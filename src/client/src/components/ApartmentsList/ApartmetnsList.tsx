@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ApartmentList.module.css";
 
-const URL = "https://aparte-api.onrender.com/apartments";
+const URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5173";
 
 interface ApartmentsListInterface {
   rooms: number;
@@ -36,7 +36,9 @@ const ApartmentsList = ({
               Accept: "application/json",
             },
           };
-          const response = await axios.get(URL, options);
+          const url = URL + "/apartments";
+          console.log(url);
+          const response = await axios.get(url, options);
           if (response.data.apartments) {
             setIsLoading(false);
             setApartments(response.data.apartments);
@@ -61,7 +63,7 @@ const ApartmentsList = ({
   );
 
   const deleteApartment = async (id: string) => {
-    const url = `${URL}/${id}`;
+    const url = `${URL}/apartments/${id}`;
 
     try {
       await axios.delete(url);

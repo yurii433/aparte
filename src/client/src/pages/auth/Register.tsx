@@ -6,6 +6,8 @@ import axios from "axios";
 import AuthInputLabel from "../../components/auth/AuthInputLabel";
 import AuthButton from "../../components/auth/AuthButton";
 
+const URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5173";
+
 const Register: React.FC = () => {
   interface newUserProps {
     email: string;
@@ -28,10 +30,9 @@ const Register: React.FC = () => {
 
   const registerNewUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const URL = `https://aparte-api.onrender.com/users`;
 
     try {
-      const user = await axios.post(URL, newUserData);
+      const user = await axios.post(URL + "/users", newUserData);
       console.log("New user registered successfully", user);
       setNewUserData({
         email: "",

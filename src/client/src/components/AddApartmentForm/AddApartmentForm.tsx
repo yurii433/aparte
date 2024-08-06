@@ -4,6 +4,8 @@ import axios from "axios";
 
 import styles from "./AddApartmentForm.module.css";
 
+const URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5173";
+
 interface FormDataInterface {
   name: string;
   price: number;
@@ -36,11 +38,9 @@ const AddApartmentForm = ({
     ) {
       setErrorMessage("Check the provided data");
     } else {
-      const url = "https://aparte-api.onrender.com/apartments";
-
       const sendDatatoDB = async () => {
         try {
-          await axios.post(url, formData, {
+          await axios.post(URL + "/apartments", formData, {
             headers: {
               "Content-Type": "application/json",
             },
