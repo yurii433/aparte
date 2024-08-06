@@ -24,6 +24,8 @@ const user_signup = async (req: Request, res: Response) => {
 
     const token = createToken(user._id);
 
+    console.log("cookie!");
+
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
 
     res.status(201).json({ user: user._id });

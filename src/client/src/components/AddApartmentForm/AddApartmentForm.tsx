@@ -4,7 +4,7 @@ import axios from "axios";
 
 import styles from "./AddApartmentForm.module.css";
 
-const URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5173";
+const URL = import.meta.env.REACT_APP_API_URL;
 
 interface FormDataInterface {
   name: string;
@@ -30,7 +30,7 @@ const AddApartmentForm = ({
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    console.log("testssss");
     if (
       formData.name.length < 1 ||
       formData.price <= 0 ||

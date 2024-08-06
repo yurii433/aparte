@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ApartmentList.module.css";
 
-const URL = import.meta.env.REACT_APP_API_URL || "http://127.0.0.1:5173";
-
+const URL = import.meta.env.REACT_APP_API_URL;
 interface ApartmentsListInterface {
   rooms: number;
   price: number;
@@ -37,7 +36,7 @@ const ApartmentsList = ({
             },
           };
           const url = URL + "/apartments";
-          console.log(url);
+
           const response = await axios.get(url, options);
           if (response.data.apartments) {
             setIsLoading(false);
