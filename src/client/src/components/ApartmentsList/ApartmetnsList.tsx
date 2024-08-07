@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ApartmentList.module.css";
 
-const URL = import.meta.env.REACT_APP_API_URL;
+const URL = import.meta.env.VITE_API_URL;
+
 interface ApartmentsListInterface {
   rooms: number;
   price: number;

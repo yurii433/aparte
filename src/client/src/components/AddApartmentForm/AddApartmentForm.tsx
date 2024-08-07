@@ -4,7 +4,7 @@ import axios from "axios";
 
 import styles from "./AddApartmentForm.module.css";
 
-const URL = import.meta.env.REACT_APP_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
 interface FormDataInterface {
   name: string;

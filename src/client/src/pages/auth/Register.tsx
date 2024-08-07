@@ -6,7 +6,7 @@ import axios from "axios";
 import AuthInputLabel from "../../components/auth/AuthInputLabel";
 import AuthButton from "../../components/auth/AuthButton";
 
-const URL = import.meta.env.REACT_APP_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
 const Register: React.FC = () => {
   interface newUserProps {
